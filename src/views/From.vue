@@ -1,6 +1,6 @@
 <template>
-    <v-app>
-      <Header></Header>
+    <v-app class="body">
+      <Header ></Header>
       <Body></Body>
     </v-app>
   </template>
@@ -15,5 +15,7 @@
   </script>
   
   <style>
-  
+  .body{
+    width: 100%;
+  }
   </style>

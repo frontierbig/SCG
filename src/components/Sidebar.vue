@@ -79,10 +79,11 @@ aside {
 	background-color: var(--dark);
 	color: var(--light);
 
-	width: calc(2rem + 32px);
+	width: calc(2rem + 30px);
 	overflow: hidden;
 	min-height: 100vh;
 	padding: 1rem;
+	
 
 	transition: 0.2s ease-in-out;
 
@@ -206,9 +207,11 @@ aside {
 		}
 	}
 
-	@media (max-width: 1024px) {
+	@media (max-width: 1600px) {
 		position: absolute;
 		z-index: 99;
+		min-height: 100vh;
 	}
+	
 }
 </style>

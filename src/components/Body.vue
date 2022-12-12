@@ -3,84 +3,128 @@
 
       <box class="addfile_box">
         <h1 class="title">Addfile</h1>
-        <h2 class="subtitle">Text</h2>
-        <div class="component_box">
-          <div class="component">
-             <p> <span class="material-icons" >align_horizontal_left</span> Short Answer</p>
-             <p> <span class="material-icons" >article </span> Paragrap</p>
-             <p> <span class="material-icons" >loop </span> Remake</p>  
-          </div>
-        </div>
 
+        <box  v-for="(item,index) in Menu" :key="index">
 
-        <h2 class="subtitle">From</h2>
-        <div class="component_box">
-          <div class="component">
-             <p> <span class="material-icons" >title</span> Title</p>
-             <p> <span class="material-icons" >article </span> Page Break</p>
-          </div>
-        </div>
-
-        <h2 class="subtitle">List</h2>
-        <div class="component_box">
-          <div class="component">
-             <p> <span class="material-icons" >radio_button_checked</span> Mutiple Choice</p>
-             <p> <span class="material-icons" >check_box </span> Checkboxes</p>
-             <p> <span class="material-icons" >arrow_drop_down_circle </span>Dropdown</p>
-          </div>
-        </div>
-
-        <h2 class="subtitle">Yes/no</h2>
-        <div class="component_box">
-          <div class="component">
-             <p> <span class="material-icons" >cancel_presentation</span>Yes or No</p>
-             <p> <span class="material-icons" >toggle_off </span> Switch</p>
-          </div>
-        </div>
-
-        <h2 class="subtitle">Dete time</h2>
-        <div class="component_box">
-          <div class="component">
-             <p> <span class="material-icons" >cancel_presentation</span>Date Time</p>
-          </div>
-        </div>
-
-        <h2 class="subtitle">Multimedia</h2>
-        <div class="component_box">
-          <div class="component">
-             <p> <span class="material-icons" >cancel_presentation</span>Embedded image</p>
-          </div>
-        </div>
-
-
-
+        <box class="box_subtitle">
+          
+        <h2 class="subtitle" >{{item.subtitle}}</h2>
+        <span class="material-icons" >arrow_drop_down</span>  
       </box>
 
+  
+        <div class="component_box">
+          <div class="component" v-for="(Menu,index) in item.menuItem" :key="index">
+             <p > <span class="material-icons" >{{item.icons[index]}}</span> {{Menu}}</p>
+          </div>
+        </div>
+      </box>
 
+      </box>
 
       <box class="content_box">
         <h1 class="title">Content</h1>
+
+        
       </box>
 
-      <box class="poperties_box">
+      <box class="poperties_box" >
         <h1 class="title"> Poperties</h1>
-      </box>
 
+        <span class="dropdown" :class="{shown: state}">
+      <a href="#" @click.prevent="toggleDropdown" class="dropdown-toggle">toggle menu</a>
+            <div class="dropdown-menu" v-show="state">
+                <ul class="list-unstyled">
+                    <slot></slot>
+                </ul>
+            </div>
+        <transition/>
+    </span>
+
+        
+
+       
+
+  
+      </box>
+      
+
+    
+
+
+    
     </contrainer>
 </template>
 
 <script>
+import { Menu } from '../FakeData';
 export default {
+  name: 'dropdown',
+  methods: {
+    toggleDropdown (e) {
+      this.state = !this.state
+    },
+    close (e) {
+      if (!this.$el.contains(e.target)) {
+        this.state = false
+      }
+    }
+  },
+  mounted () {
+    document.addEventListener('click', this.close)
+  },
+  beforeDestroy () {
+    document.removeEventListener('click',this.close)
+  },
+
+
+  data (){
+    return{
+      Menu : [{
+    subtitle:"Text",
+    menuItem:["ShortAnswer","Paragrap","Remake"],
+    icons:["align_horizontal_left","article","loop"]
+    },
+    {
+        subtitle:"From",
+        menuItem:["Title","Page Break"],
+        icons:["title","article"]
+
+    },
+    {
+        subtitle:"List",
+        menuItem:["Multiple Choice","Checkboxs","Dropdown"],
+        icons:["radio_button_checked","check_box","arrow_drop_down_circle"]
+    },
+    {
+        subtitle:"Yes or No",
+        menuItem:["Yes or No","Switch"],
+        icons:["cancel_presentation","toggle_off"]
+    },
+    {
+        subtitle:"Date time",
+        menuItem:["Date Time"],
+        icons:["cancel_presentation"]
+    },
+    {
+        subtitle:"Multimedia",
+        menuItem:["Embedded image"],
+        icons:["camera_alt"]
+    }
+  ],
+  state: false
+
+    }
+  }
 
 }
 </script>
 
-<style>
+<style scoped>
 .contrainer_box{
   display: grid;
   grid-template-columns: auto auto auto;
-  padding: 1rem;
-  justify-content: space-between;
+  padding-top: 1rem;
   width: 100%;
   
   
@@ -90,25 +134,28 @@ export default {
   border-radius: 10px 10px 0px 0px;
   display: flex;
 	flex-direction: column;
-  width: 350px;
+  width: 25rem;
   justify-content: center;
+  background-color:#ebebeb;
   
 }
 
 
 .content_box{
-  border-style: dashed;
+  
   display: flex;
 	flex-direction: column;
-  width: 420px;
+  width: 30rem;
+  background-color:#ebebeb;
 }
 
 
 .poperties_box{
-  border-style: dashed;
+  
   display: flex;
 	flex-direction: column;
-  width: 420px;
+  width: 35rem;
+  background-color:#ebebeb;
 }
 
 .title{
@@ -141,7 +188,20 @@ export default {
 .subtitle{
   font-size: 1.3rem;
   margin:1rem 0rem 1rem 2rem;
+  padding-right:5rem ;
 }
+.box_subtitle{
+  display: grid;
+  grid-template-columns: 350px 1fr;
+  align-items: center;
+}
+.box_subtitle :hover{
+  cursor: pointer;
+  opacity: 0.7;
+ 
+}
+
+
 
 
 

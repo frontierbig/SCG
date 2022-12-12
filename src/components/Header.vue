@@ -2,18 +2,15 @@
   <div class="contrainer_box">
     <div class="box_title">
         <div>
-        <h1>แบบฟอร์มตรวจบ้าน</h1>
+        <h1>Dynamic From </h1>
         <p>New Description</p>
         </div>
         <div>
             <span class="material-icons">edit</span>  
         </div>
-                
-        
     </div>
     
-
-
+    
     <div class="right_title">
         <span class="material-icons">visibility</span>
         <span class="material-icons">save</span>
@@ -38,12 +35,13 @@ export default {
     /* margin-top:0.5rem; */
     display: flex;
     flex-direction: row ;
-    width:  1350px;
+    
     font-size :1rem ;
     padding: 15px;
     box-shadow: -6px 1px 27px -5px rgba(0,0,0,0.59);
     -webkit-box-shadow: -6px 1px 27px -5px rgba(0,0,0,0.59);
     -moz-box-shadow: -6px 1px 27px -5px rgba(0,0,0,0.59);
+    width: 100%;
     
     justify-content: space-between;
     align-items: center;
@@ -56,7 +54,6 @@ export default {
     display: flex;
     flex-direction: row;
     align-items: top;
-    
 }
 .right_title{
     display: flex;

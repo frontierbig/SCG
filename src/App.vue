@@ -1,10 +1,11 @@
 <template>
 	<div class="app">
 		<!-- Sidebar -->
-		<Sidebar />
+		<Sidebar class ="sidebar"/>
 
 		<!-- Content -->
-		<router-view />
+		
+		<router-view  class="body"/>
 	</div>
 </template>
 
@@ -41,6 +42,14 @@ button {
 	outline: none;
 	background: none;
 }
+.body{
+	margin-left:20px ;
+	@media (max-width: 1600px) {
+	margin-left : 70px;
+	}
+}	
+
+
 
 .app {
 	display: flex;
@@ -54,4 +63,5 @@ button {
 		}
 	}
 }
+
 </style>
